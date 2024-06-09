@@ -25,7 +25,7 @@ class User(AbstractUser):
 
 class Payment(models.Model):
     CASH = 'cash'
-    TRANSLATION = 'translation'
+    TRANSLATION = 'transfer'
 
     METHODS = (
         (CASH, 'Наличными'),

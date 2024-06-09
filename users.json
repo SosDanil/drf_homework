@@ -21,7 +21,7 @@
   },
   {
     "model": "users.payment",
-    "pk": 1,
+    "pk": 3,
     "fields": {
       "user": 2,
       "course": 1,
@@ -33,14 +33,14 @@
   },
   {
     "model": "users.payment",
-    "pk": 1,
+    "pk": 2,
     "fields": {
       "user": 2,
       "course": null,
       "lesson": 2,
       "date": "2023-05-20",
       "sum": 3000,
-      "pay_method": "translation"
+      "pay_method": "transfer"
     }
   },
   {
@@ -52,7 +52,7 @@
       "lesson": 3,
       "date": "2023-05-30",
       "sum": 2500,
-      "pay_method": "translation"
+      "pay_method": "transfer"
     }
   }
 ]
