@@ -1,0 +1,55 @@
+[
+  {
+    "model": "materials.course",
+    "pk": 1,
+    "fields": {
+      "name": "Chemistry",
+      "preview": "",
+      "description": "Boring lessons"
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 2,
+    "fields": {
+      "name": "First lesson",
+      "preview": "",
+      "description": "Start course",
+      "url_video": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 3,
+    "fields": {
+      "name": "Second lesson",
+      "preview": "",
+      "description": "Continue course",
+      "url_video": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 4,
+    "fields": {
+      "name": "Third lesson",
+      "preview": "",
+      "description": "Middle of the course",
+      "url_video": null,
+      "course": 1
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 5,
+    "fields": {
+      "name": "Fourth lesson",
+      "preview": "",
+      "description": "Continue middle of the course",
+      "url_video": null,
+      "course": 1
+    }
+  }
+]
