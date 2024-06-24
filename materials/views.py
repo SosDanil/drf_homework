@@ -27,12 +27,14 @@ class CourseViewSet(viewsets.ModelViewSet):
             self.permission_classes = (~IsModer, IsOwner,)
         elif self.action in ['update', 'retrieve']:
             self.permission_classes = (IsModer | IsOwner,)
+        elif self.action == 'list':
+            self.permission_classes = (IsModer, IsAuthenticated)
         return super().get_permissions()
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
-    # permission_classes = (~IsModer, IsAuthenticated,)
+    permission_classes = (~IsModer, IsAuthenticated,)
 
     def perform_create(self, serializer):
         lesson = serializer.save()
@@ -43,25 +45,25 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    # permission_classes = (IsModer,)
+    permission_classes = (IsModer,)
     pagination_class = MaterialsPaginator
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    # permission_classes = (IsModer | IsOwner)
+    permission_classes = (IsModer | IsOwner)
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    # permission_classes = (IsModer | IsOwner)
+    permission_classes = (IsModer | IsOwner)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
-    # permission_classes = (~IsModer, IsOwner)
+    permission_classes = (~IsModer, IsOwner)
 
 
 class SetSubscribe(APIView):
@@ -71,7 +73,7 @@ class SetSubscribe(APIView):
         course_id = self.kwargs['pk']
         course_item = get_object_or_404(Course, id=course_id)
 
-        subs_item = Subscribe.objects.get(user=user, course=course_item)
+        subs_item = Subscribe.objects.filter(user=user, course=course_item)
 
         # Если подписка у пользователя на этот курс есть - удаляем ее
         if subs_item.exists():
