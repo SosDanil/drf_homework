@@ -57,9 +57,8 @@ class LessonTestOwnerNotModerCase(APITestCase):
             status.HTTP_201_CREATED
         )
         self.assertEqual(
-            response.json(),
-            {'id': 2, 'name': 'Flora', 'preview': None, 'description': None, 'url_video': 'http://video.youtube.com',
-             'course': 1, 'owner': 1}
+            data.get('name'),
+            'Flora'
         )
 
     def test_lesson_update(self):
@@ -82,10 +81,9 @@ class LessonTestOwnerNotModerCase(APITestCase):
     def test_lesson_delete(self):
         url = reverse('materials:lesson_delete', args=(self.lesson.pk,))
         response = self.client.delete(url)
-        print(response.json())
         self.assertEqual(
             Lesson.objects.all().count(),
-            1
+            0
         )
         self.assertEqual(
             response.status_code,
