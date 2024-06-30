@@ -5,7 +5,6 @@ from materials.validators import LessonValidator
 
 
 class LessonSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Lesson
         fields = '__all__'
@@ -31,4 +30,3 @@ class CourseSerializer(serializers.ModelSerializer):
             return 'Подписка оформлена'
         else:
             return 'Вы не подписаны на курс'
-
