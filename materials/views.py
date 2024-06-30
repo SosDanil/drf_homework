@@ -8,6 +8,7 @@ from materials.models import Course, Lesson, Subscribe
 from materials.paginations import MaterialsPaginator
 from materials.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsModer, IsOwner
+from materials.tasks import send_mail_to_owner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -18,6 +19,18 @@ class CourseViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         course = serializer.save()
         course.owner = self.request.user
+        course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        all_email_list = []
+
+        all_subs = course.subscribe.all()
+        for sub in all_subs:
+            email = sub.user.email
+            all_email_list.append(email)
+
+        send_mail_to_owner.delay(all_email_list)
         course.save()
 
     def get_permissions(self):
