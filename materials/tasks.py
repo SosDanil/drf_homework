@@ -5,11 +5,19 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from config.settings import EMAIL_HOST_USER
+from materials.models import Course
 from users.models import User
 
 
 @shared_task
-def send_mail_to_owner(all_email_list):
+def notify_subscribers_about_course_update(course_id):
+    all_email_list = []
+    course = Course.objects.get(id=course_id)
+    all_subs = course.subscribe.all()
+    for sub in all_subs:
+        email = sub.user.email
+        all_email_list.append(email)
+
     for email in all_email_list:
         send_mail(
             subject='Обновление курса',
@@ -18,17 +26,3 @@ def send_mail_to_owner(all_email_list):
             recipient_list=[email],
         )
         print(f'Письмо было отправлено на адрес {email}')
-
-
-def check_last_login():
-    print('Делаю проверку пользователей на последний вход')
-    users = User.objects.all()
-    for user in users:
-        now = datetime.datetime.now(tz=settings.TIME_ZONE)
-        delta = datetime.timedelta(days=30)
-        if now - user.last_login > delta:
-            user.is_active = False
-            user.save()
-            print(f'Пользователь {user.email} был заблокирован')
-        else:
-            print(f'Пользователь {user.email} входил недавно')

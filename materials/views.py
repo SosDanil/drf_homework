@@ -8,7 +8,7 @@ from materials.models import Course, Lesson, Subscribe
 from materials.paginations import MaterialsPaginator
 from materials.serializers import CourseSerializer, LessonSerializer
 from users.permissions import IsModer, IsOwner
-from materials.tasks import send_mail_to_owner
+from materials.tasks import notify_subscribers_about_course_update
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -23,15 +23,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         course = serializer.save()
-        all_email_list = []
-
-        all_subs = course.subscribe.all()
-        for sub in all_subs:
-            email = sub.user.email
-            all_email_list.append(email)
-
-        send_mail_to_owner.delay(all_email_list)
-        course.save()
+        notify_subscribers_about_course_update.delay(course_id=course.id)
 
     def get_permissions(self):
         if self.action == 'create':
