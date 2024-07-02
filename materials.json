@@ -5,7 +5,20 @@
     "fields": {
       "name": "Chemistry",
       "preview": "",
-      "description": "Boring lessons"
+      "description": "Boring lessons",
+      "updated_at": "2024-06-30T15:48:33.139Z",
+      "owner": null
+    }
+  },
+  {
+    "model": "materials.course",
+    "pk": 2,
+    "fields": {
+      "name": "shell_test",
+      "preview": "",
+      "description": null,
+      "updated_at": "2024-06-30T14:40:11.497Z",
+      "owner": null
     }
   },
   {
@@ -16,7 +29,8 @@
       "preview": "",
       "description": "Start course",
       "url_video": null,
-      "course": 1
+      "course": 1,
+      "owner": null
     }
   },
   {
@@ -27,7 +41,8 @@
       "preview": "",
       "description": "Continue course",
       "url_video": null,
-      "course": 1
+      "course": 1,
+      "owner": null
     }
   },
   {
@@ -38,17 +53,71 @@
       "preview": "",
       "description": "Middle of the course",
       "url_video": null,
-      "course": 1
+      "course": 1,
+      "owner": null
     }
   },
   {
     "model": "materials.lesson",
-    "pk": 5,
+    "pk": 6,
     "fields": {
       "name": "Fourth lesson",
       "preview": "",
       "description": "Continue middle of the course",
       "url_video": null,
+      "course": 1,
+      "owner": null
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 7,
+    "fields": {
+      "name": "Test",
+      "preview": "",
+      "description": null,
+      "url_video": null,
+      "course": 1,
+      "owner": 3
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 9,
+    "fields": {
+      "name": "test lesson",
+      "preview": "",
+      "description": null,
+      "url_video": "http://video.youtube.com",
+      "course": 1,
+      "owner": 3
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 10,
+    "fields": {
+      "name": "Five lesson",
+      "preview": "",
+      "description": "not Boring",
+      "url_video": "http://www.youtube.com",
+      "course": 1,
+      "owner": 3
+    }
+  },
+  {
+    "model": "materials.subscribe",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "course": 1
+    }
+  },
+  {
+    "model": "materials.subscribe",
+    "pk": 4,
+    "fields": {
+      "user": 6,
       "course": 1
     }
   }
