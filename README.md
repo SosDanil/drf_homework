@@ -1,0 +1,1 @@
+Порядок применения фикстур: users.json > groups.json > materials.json
